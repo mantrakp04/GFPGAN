@@ -146,6 +146,12 @@ class GFPGANer():
             else:
                 bg_img = None
 
+            # Change the format of bg_img from PIL to cv2
+            if bg_img is not None:
+                bg_img = cv2.cvtColor(np.array(bg_img), cv2.COLOR_RGB2BGR)
+            else:
+                bg_img = img
+            
             self.face_helper.get_inverse_affine(None)
             # paste each restored face to the input image
             restored_img = self.face_helper.paste_faces_to_input_image(upsample_img=bg_img)
