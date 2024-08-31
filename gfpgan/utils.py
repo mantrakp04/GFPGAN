@@ -136,7 +136,13 @@ class GFPGANer():
             # upsample the background
             if self.bg_upsampler is not None:
                 # Now only support RealESRGAN for upsampling background
-                bg_img = self.bg_upsampler.enhance(img, outscale=self.upscale)[0]
+                # bg_img = self.bg_upsampler.enhance(img, outscale=self.upscale)[0]
+                if int(self.upscale) == 2:
+                    bg_img = self.bg_upsampler.upscale_4x_overlapped(img)
+                elif int(self.upscale) == 4:
+                    bg_img = self.bg_upsampler.upscale_4x_overlapped(img)
+                else:
+                    bg_img = None
             else:
                 bg_img = None
 
